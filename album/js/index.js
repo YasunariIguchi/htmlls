@@ -1,8 +1,17 @@
 // (1) ページ本体が読み込まれたタイミングで実行するコード
+let w_id;
 const result = document.getElementById('result');
+const stopwatch = document.getElementById('stopwatch');
+
+stopwatch.addEventListener('click',
+  (e) => {
+    navigator.geolocation.clearWatch(w_id);
+  }, false
+);
+
 if (navigator.geolocation) {
   //現在位置を取得するコード
-  navigator.geolocation.getCurrentPosition(
+  w_id = navigator.geolocation.watchPosition(
     (pos) => {
       //現在位置の取得に成功した時の処理
       msg = `緯度：${pos.coords.latitude}<br />
